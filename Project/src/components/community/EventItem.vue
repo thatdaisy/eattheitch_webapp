@@ -1,37 +1,30 @@
 <script setup>
 defineProps({
   title: { type: String, required: true },
-  author: { type: String, required: true },
-  date: { type: String, required: true },
-  permalink: { type: String, default: null }
+  organizer: { type: String, required: true },
+  date: { type: String, required: true }
 })
 </script>
 
 <template>
-  <div class="pattern-card">
+  <div class="event-card">
     <div class="card-left">
       <span class="card-title">{{ title }}</span>
-      <span class="card-sub">{{ author }}</span>
+      <span class="card-sub">{{ organizer }}</span>
     </div>
     <div class="card-right">
-      <span class="card-date">published {{ date }}</span>
-      <a
-        v-if="permalink"
-        :href="`https://www.ravelry.com/patterns/library/${permalink}`"
-        target="_blank"
-        class="btn-details"
-      >Details</a>
-      <button v-else class="btn-details">Details</button>
+      <span class="card-date">Date {{ date }}</span>
+      <button class="btn-details">Details</button>
     </div>
   </div>
 </template>
 
 <style scoped>
-.pattern-card {
+.event-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--clr-card-pattern);
+  background: var(--clr-card-events);
   border-radius: 10px;
   padding: 12px 14px;
   gap: 8px;
@@ -46,12 +39,12 @@ defineProps({
 .card-title {
   font-size: 16px;
   font-weight: 700;
-  color: #fff;
+  color: #2a2a2a;
 }
 
 .card-sub {
   font-size: 13px;
-  color: #f0d4c4;
+  color: #4a4030;
 }
 
 .card-right {
@@ -64,12 +57,11 @@ defineProps({
 
 .card-date {
   font-size: 12px;
-  color: #f0d4c4;
+  color: #4a4030;
 }
 
 .btn-details {
-  display: inline-block;
-  background: var(--clr-btn-dark);
+  background: var(--clr-orange);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -77,10 +69,9 @@ defineProps({
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  text-decoration: none;
 }
 
 .btn-details:hover {
-  background: #1e3614;
+  background: var(--clr-orange-dark);
 }
 </style>

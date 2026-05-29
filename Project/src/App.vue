@@ -1,47 +1,42 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import NavBar from '@/components/common/NavBar.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div id="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-name">eat the itch</span>
+        <h1 class="brand-title">Crafting Community</h1>
+      </div>
+      <NavBar />
+    </header>
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+.app-header {
+  background: var(--clr-header);
 }
 
-.logo {
+.brand {
+  padding: 16px 16px 8px;
+}
+
+.brand-name {
   display: block;
-  margin: 0 auto 2rem;
+  color: var(--clr-orange);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.brand-title {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-top: 4px;
 }
 </style>
