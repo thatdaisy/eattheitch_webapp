@@ -14,7 +14,7 @@ onMounted(async () => {
 <template>
   <div class="brands-page">
     <div class="content">
-      <a class="back-link" href="#">← back</a>
+      <RouterLink class="back-link" to="/community">← back</RouterLink>
       <h2 class="section-title">Yarn Brands</h2>
       <div v-if="loading" class="loading">Loading yarns…</div>
       <div v-else class="yarn-list">

@@ -26,7 +26,6 @@ onMounted(async () => {
     <FilterPills v-model="activeFilters" />
 
     <div class="content">
-      <a class="back-link" href="#">← back</a>
 
       <!-- Trade -->
       <section v-if="showTrade" class="section">
