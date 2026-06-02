@@ -4,6 +4,10 @@ defineProps({
   organizer: { type: String, required: true },
   date: { type: String, required: true }
 })
+
+function showDetails() {
+  alert('Event details coming soon!')
+}
 </script>
 
 <template>
@@ -14,7 +18,11 @@ defineProps({
     </div>
     <div class="card-right">
       <span class="card-date">Date {{ date }}</span>
-      <button class="btn-details">Details</button>
+      <button 
+      class="btn-details"
+      @click="showDetails"
+      >Details
+      </button>
     </div>
   </div>
 </template>

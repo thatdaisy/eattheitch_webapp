@@ -57,6 +57,7 @@ export async function searchYarns(query = '', pageSize = 4) {
   }
 }
 
+
 // ── Mock data (used when no Ravelry credentials are configured) ──────────────
 
 const MOCK_PATTERNS = [

@@ -9,7 +9,7 @@ const router = useRouter()
       <RouterLink class="back-link" to="/community">← back</RouterLink>
       <h2 class="section-title">Profile</h2>
       <div class="placeholder">
-        <p>Sign in with your Ravelry account to manage your profile.</p>
+        <p>Sign in to manage your profile.</p>
         <div class="btn-wrapper">
           <button
           class="nav-btn"

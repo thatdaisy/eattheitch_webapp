@@ -54,8 +54,8 @@ const onSubmit = () => {
 .login-page {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  align-items: top;
+  height: auto;
   padding: 1.5rem;
   background: rgba(235, 235, 235, 0.64);
 }
@@ -105,6 +105,7 @@ const onSubmit = () => {
   padding: 0.95rem 1rem;
   border: none;
   border-radius: 12px;
+  margin-top: 22px;
   background: #1a2e18;
   color: #fff;
   font-weight: 700;
