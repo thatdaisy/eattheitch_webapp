@@ -1,11 +1,14 @@
 <template>
-  <AuthPage />
+  <RouterView />
 </template>
 
 <script setup>
-import AuthPage from './views/AuthPage.vue'
-</script>
+import { onMounted } from 'vue'
+import { useAuthStore } from '@/stores/auth'
 
-<style>
-/* paste your :root + global styles + layout styles here */
-</style>
+const auth = useAuthStore()
+
+onMounted(() => {
+  auth.initialize()
+})
+</script>

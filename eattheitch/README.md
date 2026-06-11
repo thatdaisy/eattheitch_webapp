@@ -31,6 +31,13 @@ npm install
 npm run dev
 ```
 
+### Format and lint
+
+```sh
+npm run format
+npm run lint
+```
+
 ### Compile and Minify for Production
 
 ```sh

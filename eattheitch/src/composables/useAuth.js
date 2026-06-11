@@ -6,6 +6,7 @@ const API_BASE = 'http://localhost:8080'
 export function useAuth() {
   const view = ref('login')
   const loading = ref(false)
+  const initialized = ref(false)
   const error = ref('')
   const successMsg = ref('')
   const fieldErrors = reactive({})
@@ -77,6 +78,27 @@ export function useAuth() {
     successMsg.value = "You've been signed out."
   }
 
+  async function checkSession() {
+    loading.value = true
+
+    try {
+      const { ok, data } = await apiFetch('/auth/current', {
+        method: 'GET',
+      })
+
+      if (ok) {
+        user.value = data.user
+      } else {
+        user.value = null
+      }
+    } catch {
+      user.value = null
+    } finally {
+      loading.value = false
+      initialized.value = true
+    }
+  }
+
   return {
     view,
     loading,
@@ -86,10 +108,13 @@ export function useAuth() {
     user,
     loginForm,
     registerForm,
+    initialized,
+    user,
     switchView,
     login,
     register,
     logout,
+    checkSession,
     formatDate,
   }
 }

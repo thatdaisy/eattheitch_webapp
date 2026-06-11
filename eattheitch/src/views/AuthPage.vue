@@ -15,7 +15,7 @@
             <button
               class="tab-btn"
               :class="{ active: view === 'login' }"
-              @click="switchView('login')"
+              @click="auth.switchView('login')"
             >
               Sign in
             </button>
@@ -23,7 +23,7 @@
             <button
               class="tab-btn"
               :class="{ active: view === 'register' }"
-              @click="switchView('register')"
+              @click="auth.switchView('register')"
             >
               Create account
             </button>
@@ -36,7 +36,7 @@
             :successMsg="successMsg"
             :fieldErrors="fieldErrors"
             :form="loginForm"
-            @submit="login"
+            @submit="auth.login"
             @switch="switchView"
           />
 
@@ -46,39 +46,35 @@
             :error="error"
             :fieldErrors="fieldErrors"
             :form="registerForm"
-            @submit="register"
+            @submit="auth.register"
             @switch="switchView"
           />
         </div>
 
         <!-- AUTHENTICATED -->
-        <MeCard v-else :user="user" :loading="loading" :formatDate="formatDate" @logout="logout" />
+        <MeCard
+          v-else
+          :user="user"
+          :loading="loading"
+          :formatDate="auth.formatDate"
+          @logout="auth.logout"
+        />
       </transition>
     </main>
   </div>
 </template>
 
 <script setup>
-import { useAuth } from '../composables/useAuth'
+import { storeToRefs } from 'pinia'
+import { useAuthStore } from '@/stores/auth'
 
-import LeftPanel from '../components/LeftPanel.vue'
-import LoginForm from '../components/LoginForm.vue'
-import RegisterForm from '../components/RegisterForm.vue'
-import MeCard from '../components/MeCard.vue'
+import LeftPanel from '@/components/LeftPanel.vue'
+import LoginForm from '@/components/LoginForm.vue'
+import RegisterForm from '@/components/RegisterForm.vue'
+import MeCard from '@/components/MeCard.vue'
 
-const {
-  view,
-  loading,
-  error,
-  successMsg,
-  fieldErrors,
-  user,
-  loginForm,
-  registerForm,
-  switchView,
-  login,
-  register,
-  logout,
-  formatDate,
-} = useAuth()
+const auth = useAuthStore()
+
+const { user, view, loading, error, successMsg, fieldErrors, loginForm, registerForm } =
+  storeToRefs(auth)
 </script>
