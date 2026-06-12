@@ -12,9 +12,9 @@
 
       <!-- Navigation -->
       <nav class="nav-buttons">
-        <button class="nav-btn">Brands</button>
-        <button class="nav-btn">Community</button>
-        <button class="nav-btn">Profile</button>
+        <button class="nav-btn" @click="navigate('brands')">Brands</button>
+        <button class="nav-btn" @click="navigate('community')">Community</button>
+        <button class="nav-btn" @click="navigate('profile')">Profile</button>
       </nav>
 
       <!-- Filters -->
@@ -129,8 +129,10 @@
 
 <script setup>
 import { useAuth } from '../composables/useAuth'
+import { usePage } from '../composables/usePage'
 
 const { user, logout } = useAuth()
+const { navigate } = usePage()
 </script>
 
 <style scoped>
