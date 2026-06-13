@@ -1,4 +1,4 @@
-# eattheitch
+# eattheitch - webapp
 
 This template should help get you started developing with Vue 3 in Vite.
 
@@ -15,9 +15,6 @@ This template should help get you started developing with Vue 3 in Vite.
   - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
   - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
 
 ## Project Setup
 
@@ -31,17 +28,10 @@ npm install
 npm run dev
 ```
 
-### Format and lint
+### Format with [Prettier](https://prettier.io)
 
 ```sh
 npm run format
-npm run lint
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
