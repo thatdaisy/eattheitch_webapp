@@ -56,22 +56,21 @@ export const useAuthStore = defineStore('auth', {
 
     async initialize() {
       if (this.initialized) return
+      await this.fetchCurrentUser()
+      this.initialized = true
+    },
 
+    async fetchCurrentUser() {
       this.loading = true
 
       try {
         const { ok, data } = await apiFetch('/auth/current')
 
-        if (ok) {
-          this.user = data.user
-        } else {
-          this.user = null
-        }
+        this.user = ok ? data.user : null
       } catch {
         this.user = null
       } finally {
         this.loading = false
-        this.initialized = true
       }
     },
 
@@ -89,13 +88,10 @@ export const useAuthStore = defineStore('auth', {
         })
 
         if (ok) {
-          this.user = data.user
-
+          await this.fetchCurrentUser()
           this.loginForm.email = ''
           this.loginForm.password = ''
-          router.push({
-            name: 'home',
-          })
+          await router.push({ name: 'home' })
         } else {
           this.handleApiError(data, status)
         }
@@ -117,15 +113,11 @@ export const useAuthStore = defineStore('auth', {
         })
 
         if (ok) {
-          this.user = data.user
-
-          this.registerForm.username = ''
-          this.registerForm.email = ''
-          this.registerForm.password = ''
-
-          router.push({
-            name: 'dashboard',
-          })
+            await this.fetchCurrentUser()
+            this.registerForm.username = ''
+            this.registerForm.email = ''
+            this.registerForm.password = ''
+            await router.push({ name: 'home' })
         } else {
           this.handleApiError(data, status)
         }

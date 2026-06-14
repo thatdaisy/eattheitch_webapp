@@ -46,20 +46,19 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   const auth = useAuthStore()
 
-  // ensure session is checked once
+  if (to.name === 'auth') {
+    return
+  }
+
   if (!auth.initialized) {
     await auth.initialize()
   }
 
-  const isAuth = auth.isAuthenticated
-
-  // protect dashboard
-  if (to.meta.requiresAuth && !isAuth) {
+  if (to.meta.requiresAuth && !auth.isAuthenticated) {
     return { name: 'auth' }
   }
 
-  // prevent login page if already logged in
-  if (to.name === 'auth' && isAuth) {
+  if (to.name === 'auth' && auth.isAuthenticated) {
     return { name: 'home' }
   }
 })
