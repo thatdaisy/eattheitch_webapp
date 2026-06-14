@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AuthView from '@/views/AuthPage.vue'
 import HomeView from '@/views/HomePage.vue'
 import BrandsView from '@/views/BrandsPage.vue'
+import ProfileView from '@/views/ProfilePage.vue'
+
 
 import { useAuthStore } from '@/stores/auth'
 
@@ -26,6 +28,14 @@ const router = createRouter({
       path: '/brands',
       name: 'brands',
       component: BrandsView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: ProfileView,
       meta: {
         requiresAuth: true,
       },

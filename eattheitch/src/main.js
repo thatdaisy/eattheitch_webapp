@@ -6,6 +6,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
 import './styles/main.css'
+import './styles/page-layout.css'
 
 const app = createApp(App)
 app.use(createPinia())
