@@ -1,31 +1,9 @@
 <template>
   <div class="page-shell">
-    <!-- Header -->
-    <div class="page-header">
-      <div class="header-top">
-        <div class="brand">
-          <div class="brand-name">eat the itch</div>
-          <div class="brand-sub">Crafting Community</div>
-        </div>
-        <button class="logout-btn" @click="handleLogout">Sign Out</button>
-      </div>
-
-      <!-- Navigation -->
-      <nav class="nav-links">
-        <RouterLink to="/home" class="nav-button">Dashboard</RouterLink>
-        <RouterLink to="/brands" class="nav-button">Brands</RouterLink>
-        <RouterLink to="/community" class="nav-button">Community</RouterLink>
-        <RouterLink to="/profile" class="nav-button">Profile</RouterLink>
-      </nav>
-
-      <!-- Filters -->
-      <div class="filters">
-        <label><input type="checkbox" checked /><span>all</span></label>
-        <label><input type="checkbox" /><span>Trade</span></label>
-        <label><input type="checkbox" /><span>Pattern</span></label>
-        <label><input type="checkbox" /><span>Events</span></label>
-      </div>
-    </div>
+    <AppHeader
+      :user="user"
+      @logout="auth.logout"
+    />
 
     <!-- Profile Content -->
     <div class="page-content single-column">
@@ -59,6 +37,7 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import MeCard from '@/components/auth/MeCard.vue'
+import AppHeader from '@/components/common/AppHeader.vue'
 
 const auth = useAuthStore()
 const router = useRouter()

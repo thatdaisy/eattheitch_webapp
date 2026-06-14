@@ -112,6 +112,13 @@ body {
   text-transform: uppercase;
 }
 
+.welocme-back {
+  color: var(--sage);
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  margin-top: 20px;
+}
+
 .panel-statement {
   position: relative;
   z-index: 1;
