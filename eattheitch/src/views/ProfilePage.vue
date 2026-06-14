@@ -17,6 +17,10 @@
           :formatDate="formatDate"
           @logout="handleLogout"
         />
+        <CountrySelect
+          v-model="profileForm.country"
+        />
+
       </div>
 
       <div class="content-section">
@@ -33,15 +37,18 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import MeCard from '@/components/auth/MeCard.vue'
 import AppHeader from '@/components/common/AppHeader.vue'
+import { reactive } from 'vue'
+import CountrySelect from '@/components/common/CountrySelect.vue'
+
+const profileForm = reactive({
+  country: ''
+})
 
 const auth = useAuthStore()
-const router = useRouter()
-const user = computed(() => auth.user)
+const user = auth.user
 
 function formatDate(iso) {
   if (!iso) return '—'
@@ -52,11 +59,6 @@ function formatDate(iso) {
     hour: '2-digit',
     minute: '2-digit',
   })
-}
-
-async function handleLogout() {
-  await auth.logout()
-  router.replace('/')
 }
 </script>
 

@@ -15,19 +15,10 @@
       </div>
 
       <div class="me-row">
-        <span class="me-key">Location</span>
-        <span class="me-val">{{ user.location || 'not set' }}</span>
-      </div>
-
-      <div class="me-row">
         <span class="me-key">Member since</span>
         <span class="me-val">{{ formatDate(user.created_at) }}</span>
       </div>
     </div>
-
-    <button class="btn-secondary" @click="$emit('logout')" :disabled="loading">
-      {{ loading ? 'Signing out…' : 'Sign out' }}
-    </button>
   </div>
 </template>
 
@@ -37,6 +28,4 @@ defineProps({
   loading: Boolean,
   formatDate: Function,
 })
-
-defineEmits(['logout'])
 </script>
