@@ -94,7 +94,7 @@ export const useAuthStore = defineStore('auth', {
           this.loginForm.email = ''
           this.loginForm.password = ''
           router.push({
-            name: 'dashboard',
+            name: 'home',
           })
         } else {
           this.handleApiError(data, status)
@@ -149,7 +149,7 @@ export const useAuthStore = defineStore('auth', {
         this.view = 'login'
         this.successMsg = "You've been signed out."
         router.push({
-            name: 'auth'
+          name: 'auth',
         })
       }
     },

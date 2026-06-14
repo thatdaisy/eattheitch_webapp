@@ -1,7 +1,11 @@
 <template>
   <div class="brands-page">
     <div class="brands-header">
-      <button class="back-btn" @click="navigate('home')">← back</button>
+      <nav class="nav-links">
+        <RouterLink to="/home" class="nav-button">
+          Back 
+        </RouterLink>
+      </nav>
       <h1>Brands & Reviews</h1>
       <button class="add-btn" @click="openModal">+ Add Brand</button>
     </div>
@@ -22,7 +26,7 @@
         <div class="review" v-for="r in recentReviews" :key="r.id">
           <div class="review-head">
             <div class="review-brand">{{ r.brand }}</div>
-            <div class="rating">{{ '🐑'.repeat(r.rating) }}{{ r.rating===0?'—':'' }}</div>
+            <div class="rating">{{ '🐑'.repeat(r.rating) }}{{ r.rating === 0 ? '—' : '' }}</div>
           </div>
           <div class="review-body">{{ r.text }}</div>
           <div class="review-author">{{ r.author || 'Anonymous' }}</div>
@@ -43,7 +47,7 @@
 
           <label>Rating (0-5 sheep)</label>
           <select v-model.number="form.rating">
-            <option v-for="n in 6" :key="n-1" :value="n-1">{{ n-1 }}</option>
+            <option v-for="n in 6" :key="n - 1" :value="n - 1">{{ n - 1 }}</option>
           </select>
 
           <div class="modal-actions">
@@ -58,10 +62,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { usePage } from '../composables/usePage'
 import { apiFetch } from '../utils/api'
-
-const { navigate } = usePage()
 
 const showModal = ref(false)
 
@@ -112,11 +113,14 @@ async function submit() {
     }
 
     // Post review to backend
-    const { ok: ok2, data: reviewResp } = await apiFetch(`http://localhost:8080/brands/${brand.id}/reviews`, {
-      method: 'POST',
-      body: JSON.stringify(reviewBody),
-      credentials: 'include',
-    })
+    const { ok: ok2, data: reviewResp } = await apiFetch(
+      `http://localhost:8080/brands/${brand.id}/reviews`,
+      {
+        method: 'POST',
+        body: JSON.stringify(reviewBody),
+        credentials: 'include',
+      },
+    )
 
     if (ok2 && (reviewResp?.id || reviewResp?.review)) {
       const newReview = reviewResp.review || reviewResp
@@ -143,21 +147,76 @@ async function submit() {
 }
 
 const recentReviews = computed(() => {
-  return brands.value.flatMap((b) => b.reviews.map((r) => ({ id: r.id, brand: b.name, text: r.text, rating: r.rating }))).slice().reverse()
+  return brands.value
+    .flatMap((b) =>
+      b.reviews.map((r) => ({ id: r.id, brand: b.name, text: r.text, rating: r.rating })),
+    )
+    .slice()
+    .reverse()
 })
 </script>
 
 <style scoped>
-.brands-header { display:flex; align-items:center; gap:1rem; padding:1rem }
-.back-btn, .add-btn { background:var(--moss); color:white; border:none; padding:0.5rem 1rem; border-radius:8px }
-.brands-list, .reviews-list { padding:1rem }
-.brands-content { display:flex; flex-direction:column; gap:1.25rem }
-.brand-cards { display:flex; gap:1rem; flex-wrap:wrap }
-.brand-card { background:var(--sage); padding:0.75rem 1rem; border-radius:10px }
-.review { background:white; padding:0.75rem; border-radius:10px; margin-bottom:0.75rem }
-.modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.35); display:flex; align-items:center; justify-content:center }
-.modal { background:white; padding:1rem; border-radius:10px; width:90%; max-width:480px }
-.modal-actions { display:flex; justify-content:flex-end; gap:0.5rem; margin-top:0.75rem }
+.brands-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+.back-btn,
+.add-btn {
+  background: var(--moss);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+.brands-list,
+.reviews-list {
+  padding: 1rem;
+}
+.brands-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.brand-cards {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.brand-card {
+  background: var(--sage);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+}
+.review {
+  background: white;
+  padding: 0.75rem;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 480px;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
 
 @media (min-width: 901px) {
   .brands-content {
@@ -169,9 +228,17 @@ const recentReviews = computed(() => {
     align-items: start;
   }
 
-  .brands-list { grid-column: 1 }
-  .reviews-list { grid-column: 2 }
+  .brands-list {
+    grid-column: 1;
+  }
+  .reviews-list {
+    grid-column: 2;
+  }
 
-  .brand-cards { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:1rem }
+  .brand-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
 }
 </style>

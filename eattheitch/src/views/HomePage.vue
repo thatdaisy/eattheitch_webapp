@@ -7,14 +7,23 @@
           <div class="brand-name">eat the itch</div>
           <div class="brand-sub">Crafting Community</div>
         </div>
-        <button class="logout-btn" @click="logout">Sign Out</button>
+        <button class="logout-btn" @click="handleLogout">Sign Out</button>
       </div>
 
       <!-- Navigation -->
-      <nav class="nav-buttons">
-        <button class="nav-btn" @click="navigate('brands')">Brands</button>
-        <button class="nav-btn" @click="navigate('community')">Community</button>
-        <button class="nav-btn" @click="navigate('profile')">Profile</button>
+      <nav class="nav-links">
+        <RouterLink to="/dashboard" class="nav-button">
+          Dashboard 
+        </RouterLink>
+        <RouterLink to="/brands" class="nav-button">
+          Brands 
+        </RouterLink>
+        <RouterLink to="/community" class="nav-button">
+          Community 
+        </RouterLink>
+        <RouterLink to="/profile" class="nav-button">
+          Profile 
+        </RouterLink>
       </nav>
 
       <!-- Filters -->
@@ -128,11 +137,14 @@
 </template>
 
 <script setup>
-import { useAuth } from '../composables/useAuth'
-import { usePage } from '../composables/usePage'
+import { useAuthStore } from '@/stores/auth'
 
-const { user, logout } = useAuth()
-const { navigate } = usePage()
+const auth = useAuthStore()
+
+async function handleLogout() {
+  await auth.logout()
+  router.replace('/')
+}
 </script>
 
 <style scoped>
@@ -192,27 +204,61 @@ const { navigate } = usePage()
 }
 
 /* Navigation */
-.nav-buttons {
+.nav-links {
   display: flex;
   gap: 0.75rem;
-  margin-bottom: 2rem;
   flex-wrap: wrap;
 }
 
-.nav-btn {
-  background: var(--rust);
-  color: white;
-  border: none;
-  padding: 0.65rem 1.25rem;
+.nav-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 120px;
+  padding: 0.75rem 1rem;
+
+  background: var(--warm-white);
+  color: var(--forest);
+
+  border: 1.5px solid var(--forest);
   border-radius: var(--radius-md);
+
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  text-decoration: none;
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: all var(--transition);
+
+  transition:
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
 }
 
-.nav-btn:hover {
+.nav-button:hover {
   background: var(--terracotta);
+  color: var(--warm-white);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 4px 12px rgba(44, 95, 45, 0.15);
+}
+
+.nav-button:active {
+  transform: translateY(0);
+}
+
+/* Current route */
+.nav-button.router-link-exact-active {
+  background: var(--rust);
+  border-color: var(--rust);
+  color: var(--warm-white);
+
+  box-shadow: 0 4px 12px rgba(196, 97, 42, 0.2);
 }
 
 /* Filters */

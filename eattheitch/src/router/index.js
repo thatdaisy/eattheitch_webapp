@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import AuthView from '@/views/AuthPage.vue'
-import DashboardView from '@/views/DashboardView.vue'
+import HomeView from '@/views/HomePage.vue'
+import BrandsView from '@/views/BrandsPage.vue'
 
 import { useAuthStore } from '@/stores/auth'
 
@@ -14,9 +15,17 @@ const router = createRouter({
       component: AuthView,
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: DashboardView,
+      path: '/home',
+      name: 'home',
+      component: HomeView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/brands',
+      name: 'brands',
+      component: BrandsView,
       meta: {
         requiresAuth: true,
       },
@@ -41,7 +50,7 @@ router.beforeEach(async (to) => {
 
   // prevent login page if already logged in
   if (to.name === 'auth' && isAuth) {
-    return { name: 'dashboard' }
+    return { name: 'home' }
   }
 })
 

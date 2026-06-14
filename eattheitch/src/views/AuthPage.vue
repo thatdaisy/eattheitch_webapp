@@ -4,7 +4,6 @@
 
     <main class="panel-right">
       <transition name="fade" mode="out-in">
-        <!-- AUTH STATE -->
         <div v-if="!user" :key="'auth'" class="form-card">
           <div class="mobile-brand">
             <div class="brand-name">eat the itch</div>
@@ -51,7 +50,6 @@
           />
         </div>
 
-        <!-- AUTHENTICATED -->
         <MeCard
           v-else
           :user="user"
@@ -68,13 +66,21 @@
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
 
-import LeftPanel from '@/components/LeftPanel.vue'
-import LoginForm from '@/components/LoginForm.vue'
-import RegisterForm from '@/components/RegisterForm.vue'
-import MeCard from '@/components/MeCard.vue'
+import LeftPanel from '@/components/auth/LeftPanel.vue'
+import LoginForm from '@/components/auth/LoginForm.vue'
+import RegisterForm from '@/components/auth/RegisterForm.vue'
+import MeCard from '@/components/auth//MeCard.vue'
 
 const auth = useAuthStore()
 
-const { user, view, loading, error, successMsg, fieldErrors, loginForm, registerForm } =
-  storeToRefs(auth)
+const { 
+  user, 
+  view, 
+  loading, 
+  error, 
+  successMsg, 
+  fieldErrors, 
+  loginForm, 
+  registerForm 
+} =  storeToRefs(auth)
 </script>
