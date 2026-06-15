@@ -5,9 +5,7 @@
       <div class="date">{{ formatDate(review.created_at) }}</div>
     </div>
 
-    <div class="rating-overall">
-      ⭐ {{ review.rating_overall }}/5
-    </div>
+    <div class="rating-overall">⭐ {{ review.rating_overall }}/5</div>
 
     <div class="rating-grid">
       <div class="rating-item">
@@ -38,7 +36,6 @@
 </template>
 
 <script setup>
-
 import { useReviewsStore } from '@/stores/reviews'
 const reviews = useReviewsStore()
 
@@ -49,7 +46,7 @@ function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('en-AT', {
     year: 'numeric',
     month: 'short',
-    day: 'numeric'
+    day: 'numeric',
   })
 }
 </script>

@@ -113,11 +113,11 @@ export const useAuthStore = defineStore('auth', {
         })
 
         if (ok) {
-            await this.fetchCurrentUser()
-            this.registerForm.username = ''
-            this.registerForm.email = ''
-            this.registerForm.password = ''
-            await router.push({ name: 'home' })
+          await this.fetchCurrentUser()
+          this.registerForm.username = ''
+          this.registerForm.email = ''
+          this.registerForm.password = ''
+          await router.push({ name: 'home' })
         } else {
           this.handleApiError(data, status)
         }

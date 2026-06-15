@@ -2,18 +2,23 @@
   <div class="page-shell">
     <AppHeader :user="user" @logout="auth.logout" />
 
-    <div class="page-content single-column">
-      <div class="content-section">
-        <div class="section-header">
-          <h2>Latest Reviews</h2>
-        </div>
-        <ReviewCardSmall />
+    <div class="main-content">
+      <div class="content-left">
+        <section class="content-section">
+          <div class="section-header">
+            <h2>Latest Reviews</h2>
+          </div>
+          <ReviewCardSmall />
+        </section>
       </div>
-      <div class="content-section">
-        <div class="section-header">
-          <h2>New Trades</h2>
-        </div>
-        <TradeCardSmall />
+
+      <div class="content-right">
+        <section class="content-section">
+          <div class="section-header">
+            <h2>New Trades</h2>
+          </div>
+          <TradeCardSmall />
+        </section>
       </div>
     </div>
   </div>

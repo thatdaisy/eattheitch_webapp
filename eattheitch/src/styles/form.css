@@ -71,6 +71,22 @@ textarea {
   cursor: not-allowed;
 }
 
+.form-btn-secondary {
+  width: 100%;
+  margin: 20px 0px 20px;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--sage);
+  color: var(--charcoal);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form-btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 .status {
   font-size: 0.9rem;
 }

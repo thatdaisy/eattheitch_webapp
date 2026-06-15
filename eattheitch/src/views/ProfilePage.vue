@@ -23,7 +23,12 @@
         </div>
         <div v-if="loading">Loading...</div>
         <div v-for="trade in myTrades">
-          <TradeCard :trade="trade" :user="user" @edit="handleEdit" @delete="tradesStore.deleteTrade" />
+          <TradeCard
+            :trade="trade"
+            :user="user"
+            @edit="handleEdit"
+            @delete="tradesStore.deleteTrade"
+          />
         </div>
         <p v-if="error">
           {{ error }}

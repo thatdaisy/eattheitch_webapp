@@ -6,7 +6,6 @@ import BrandsView from '@/views/BrandsPage.vue'
 import TradingView from '@/views/TradingPage.vue'
 import ProfileView from '@/views/ProfilePage.vue'
 
-
 import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({

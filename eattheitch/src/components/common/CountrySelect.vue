@@ -13,19 +13,12 @@
         {{ loading ? 'Loading countries…' : placeholder }}
       </option>
 
-      <option
-        v-for="country in countries"
-        :key="country.code"
-        :value="country.code"
-      >
+      <option v-for="country in countries" :key="country.code" :value="country.code">
         {{ country.flag }} {{ country.name }}
       </option>
     </select>
 
-    <div
-      v-if="error"
-      class="field-error"
-    >
+    <div v-if="error" class="field-error">
       {{ error }}
     </div>
   </div>
@@ -38,28 +31,26 @@ import { apiFetch } from '@/utils/api'
 const props = defineProps({
   modelValue: {
     type: String,
-    default: ''
+    default: '',
   },
 
   label: {
     type: String,
-    default: 'Country'
+    default: 'Country',
   },
 
   placeholder: {
     type: String,
-    default: 'Select a country'
+    default: 'Select a country',
   },
 
   id: {
     type: String,
-    default: 'country'
-  }
+    default: 'country',
+  },
 })
 
-const emit = defineEmits([
-  'update:modelValue'
-])
+const emit = defineEmits(['update:modelValue'])
 
 const countries = ref([])
 const loading = ref(false)

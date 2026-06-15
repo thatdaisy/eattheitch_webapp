@@ -16,8 +16,7 @@ export const useReviewsStore = defineStore('reviews', {
   }),
 
   getters: {
-    reviewsByBrand: (state) => (brandId) =>
-      state.reviews.filter((r) => r.brand_id === brandId),
+    reviewsByBrand: (state) => (brandId) => state.reviews.filter((r) => r.brand_id === brandId),
 
     averageRating: (state) => {
       if (!state.reviews.length) return 0
@@ -54,16 +53,16 @@ export const useReviewsStore = defineStore('reviews', {
     },
 
     async fetchReviews() {
-        this.loading = true
-        try {
-            const { ok, data } = await apiFetch('/reviews')
-            console.log(data)
-            this.reviews = ok ? data : null
-        } catch {
-            this.user = null
-        } finally {
-            this.loading = false
-        }
+      this.loading = true
+      try {
+        const { ok, data } = await apiFetch('/reviews')
+        console.log(data)
+        this.reviews = ok ? data : null
+      } catch {
+        this.user = null
+      } finally {
+        this.loading = false
+      }
     },
 
     async fetchReviewById(id) {

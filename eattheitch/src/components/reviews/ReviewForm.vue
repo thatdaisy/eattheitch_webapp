@@ -1,5 +1,4 @@
 <template>
-  <h3>New Review</h3>
   <div class="form-panel">
     <form class="form-base" @submit.prevent="submitReview">
       <input id="author" v-model="form.author" type="text" required disabled hidden />

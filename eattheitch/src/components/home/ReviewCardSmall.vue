@@ -9,7 +9,7 @@
         <div class="date">{{ formatDate(review.created_at) }}</div>
       </div>
 
-      <div class="rating-overall"><SheepIcon/> {{ review.rating_overall }}/5</div>
+      <div class="rating-overall"><SheepIcon /> {{ review.rating_overall }}/5</div>
 
       <div class="rating-grid">
         <div class="rating-item">
@@ -97,5 +97,4 @@ onMounted(loadReviews)
 .rating-item span {
   margin-left: 10px;
 }
-
 </style>

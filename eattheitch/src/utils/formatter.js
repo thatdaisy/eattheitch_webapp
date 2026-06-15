@@ -3,6 +3,6 @@ export function formatDate(iso) {
   return new Date(iso).toLocaleDateString('en-AT', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   })
 }

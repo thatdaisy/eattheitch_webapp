@@ -5,20 +5,17 @@
       <div class="date">{{ formatDate(trade.created_at) }}</div>
     </div>
     <div>
-      <template v-if="isEditing">
-        <input v-model="editForm.brand_name" class="card-brand" />
-        <input v-model="editForm.location" class="card-item" />
-        <input v-model="editForm.title" class="card-item-bold" />
-        <textarea v-model="editForm.text" class="card-text"></textarea>
-      </template>
-      <template v-else>
+      <div v-if="isEditing">
+        <TradeForm :form="editForm" :field-errors="fieldErrors"/>
+      </div>
+      <div v-else>
         <div class="card-brand">{{ trade.brand_name }}</div>
         <div class="card-item">{{ trade.location }}</div>
         <div class="card-item-bold">{{ trade.title }}</div>
         <p class="card-text">
           {{ trade.text }}
         </p>
-      </template>
+      </div>
     </div>
 
     <div v-if="isOwner" class="card-actions">
@@ -35,12 +32,14 @@
 </template>
 
 <script setup>
+import TradeForm from './TradeForm.vue'
 import BinIcon from '../icons/BinIcon.vue'
 import EditIcon from '../icons/EditIcon.vue'
 import SaveIcon from '../icons/SaveIcon.vue'
 import CancelIcon from '../icons/CancelIcon.vue'
-import { formatDate } from '@/utils/formatter'
 import { computed, reactive, ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import { formatDate } from '@/utils/formatter'
 import { useTradesStore } from '@/stores/trades.js'
 
 const props = defineProps({
@@ -50,7 +49,8 @@ const props = defineProps({
 
 const emit = defineEmits(['delete'])
 
-const tradeStore = useTradesStore()
+const tradesStore = useTradesStore()
+const {fieldErrors} = storeToRefs(tradesStore)
 
 const isOwner = computed(() => {
   return props.user.username === props.trade.author
@@ -66,6 +66,7 @@ const editForm = reactive({
 })
 
 const startEdit = () => {
+  editForm.author = props.trade.author
   editForm.brand_name = props.trade.brand_name
   editForm.location = props.trade.location
   editForm.title = props.trade.title
@@ -78,7 +79,7 @@ const cancelEdit = () => {
 }
 
 const saveEdit = async () => {
-  await tradeStore.updateTrade(props.trade.id, { ...editForm })
+  await tradesStore.updateTrade(props.trade.id, { ...editForm })
   isEditing.value = false
 }
 </script>

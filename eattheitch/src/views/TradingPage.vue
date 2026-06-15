@@ -2,26 +2,36 @@
   <div class="page-shell">
     <AppHeader :user="user" @logout="auth.logout" />
 
-    <div class="page-content single-column">
-      <div class="content-section">
-        <div class="section-header">
-          <h2>Trades</h2>
-        </div>
-        <div v-if="loading">Loading...</div>
-        <div v-for="trade in trades">
-          <TradeCard :trade="trade" :user="user" @edit="handleEdit" @delete="tradesStore.deleteTrade" />
-        </div>
-        <p v-if="error">
-          {{ error }}
-        </p>
+    <div class="main-content">
+      <div class="content-left">
+        <section class="content-section">
+          <div class="section-header">
+            <h2>Trades</h2>
+          </div>
+          <div v-if="loading">Loading...</div>
+          <div v-for="trade in trades">
+            <TradeCard
+              :trade="trade"
+              :user="user"
+              @edit="tradesStore.updateTrade"
+              @delete="tradesStore.deleteTrade"
+            />
+          </div>
+          <p v-if="error">
+            {{ error }}
+          </p>
+        </section>
       </div>
-      <div class="content-section">
-        <div class="section-header">
-          <h2>Create New Trade</h2>
-        </div>
-        <div>
-          <TradeForm :user="user"></TradeForm>
-        </div>
+
+      <div class="content-right">
+        <section class="content-section">
+          <div class="section-header">
+            <h2>Create New Trade</h2>
+          </div>
+          <div>
+            <TradeCreate :user="user"></TradeCreate>
+          </div>
+        </section>
       </div>
     </div>
   </div>
@@ -31,7 +41,7 @@
 import { onMounted } from 'vue'
 import AppHeader from '@/components/common/AppHeader.vue'
 import TradeCard from '@/components/trades/TradeCard.vue'
-import TradeForm from '@/components/trades/TradeForm.vue'
+import TradeCreate from '@/components/trades/TradeCreate.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useTradesStore } from '@/stores/trades'
 import { storeToRefs } from 'pinia'

@@ -2,15 +2,22 @@
   <div class="page-shell">
     <AppHeader :user="user" @logout="auth.logout" />
 
-    <div class="page-content single-column">
-      <div class="content-section">
-        <div class="section-header">
-          <h2>Brands</h2>
-        </div>
-        <ReviewForm
-          :user="user"
-          :currentBrand="currentBrand"
-        />
+    <div class="main-content">
+      <div class="content-left">
+        <section class="content-section">
+          <div class="section-header">
+            <h2>Brands</h2>
+          </div>
+        </section>
+      </div>
+
+      <div class="content-right">
+        <section class="content-section">
+          <div class="section-header">
+            <h2>New Review</h2>
+          </div>
+          <ReviewForm :user="user" :currentBrand="currentBrand" />
+        </section>
       </div>
     </div>
   </div>

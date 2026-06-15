@@ -22,7 +22,9 @@
   align-items: flex-start;
 }
 
-.brand { flex: 1 }
+.brand {
+  flex: 1;
+}
 
 .brand-name {
   font-size: 1.75rem;
@@ -91,7 +93,9 @@
   box-shadow: 0 4px 12px rgba(44, 95, 45, 0.15);
 }
 
-.nav-button:active { transform: translateY(0) }
+.nav-button:active {
+  transform: translateY(0);
+}
 
 .nav-button.router-link-exact-active {
   background: var(--rust);
@@ -176,7 +180,9 @@
   transition: color var(--transition);
 }
 
-.show-more:hover { color: var(--terracotta) }
+.show-more:hover {
+  color: var(--terracotta);
+}
 
 /* Items */
 .items-list {
@@ -199,14 +205,35 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.trade-item   { background: var(--sage);       color: var(--charcoal) }
-.pattern-item { background: var(--rust);        color: white }
-.event-item   { background: var(--light-gray);  color: var(--charcoal) }
-.forum-item   { background: var(--sand);        color: var(--charcoal) }
+.trade-item {
+  background: var(--sage);
+  color: var(--charcoal);
+}
+.pattern-item {
+  background: var(--rust);
+  color: white;
+}
+.event-item {
+  background: var(--light-gray);
+  color: var(--charcoal);
+}
+.forum-item {
+  background: var(--sand);
+  color: var(--charcoal);
+}
 
-.item-title    { font-size: 1.1rem; font-weight: 600 }
-.item-subtitle { font-size: 0.95rem; opacity: 0.85 }
-.item-meta     { font-size: 0.85rem; opacity: 0.7 }
+.item-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.item-subtitle {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+.item-meta {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
 
 .details-btn {
   align-self: flex-end;
@@ -221,10 +248,16 @@
   transition: all var(--transition);
 }
 
-.details-btn:hover { background: var(--forest) }
+.details-btn:hover {
+  background: var(--forest);
+}
 
-.pattern-item .details-btn { background: var(--terracotta) }
-.pattern-item .details-btn:hover { background: var(--rust) }
+.pattern-item .details-btn {
+  background: var(--terracotta);
+}
+.pattern-item .details-btn:hover {
+  background: var(--rust);
+}
 
 /* ── Brands ─────────────────────────────────── */
 .brand-cards {
@@ -240,8 +273,15 @@
   flex: 1 1 140px;
 }
 
-.brand-card-name { font-weight: 600; color: var(--charcoal) }
-.brand-card-meta { font-size: 0.85rem; color: var(--mid-gray); margin-top: 0.25rem }
+.brand-card-name {
+  font-weight: 600;
+  color: var(--charcoal);
+}
+.brand-card-meta {
+  font-size: 0.85rem;
+  color: var(--mid-gray);
+  margin-top: 0.25rem;
+}
 
 .review {
   background: var(--sand);
@@ -258,9 +298,18 @@
   align-items: center;
 }
 
-.review-brand  { font-weight: 600; color: var(--charcoal) }
-.review-body   { font-size: 0.95rem; color: var(--charcoal) }
-.review-author { font-size: 0.8rem; color: var(--mid-gray) }
+.review-brand {
+  font-weight: 600;
+  color: var(--charcoal);
+}
+.review-body {
+  font-size: 0.95rem;
+  color: var(--charcoal);
+}
+.review-author {
+  font-size: 0.8rem;
+  color: var(--mid-gray);
+}
 
 .add-btn {
   background: var(--moss);
@@ -274,7 +323,9 @@
   transition: background var(--transition);
 }
 
-.add-btn:hover { background: var(--forest) }
+.add-btn:hover {
+  background: var(--forest);
+}
 
 /* ── Modal ─────────────────────────────────── */
 .modal-backdrop {
@@ -347,7 +398,9 @@
   color: white;
 }
 
-.modal-actions button[type='submit']:hover { background: var(--forest) }
+.modal-actions button[type='submit']:hover {
+  background: var(--forest);
+}
 
 /* ── Mobile ─────────────────────────────────── */
 @media (max-width: 600px) {
@@ -356,13 +409,19 @@
     min-height: auto;
   }
 
-  .brand-name { font-size: 1.5rem }
-  .brand-sub  { font-size: 1.5rem }
+  .brand-name {
+    font-size: 1.5rem;
+  }
+  .brand-sub {
+    font-size: 1.5rem;
+  }
 
   .page-content {
     padding: 1.5rem 1rem;
     gap: 1.5rem;
   }
 
-  .content-section { padding: 1rem }
+  .content-section {
+    padding: 1rem;
+  }
 }
