@@ -1,5 +1,5 @@
 <template>
-  <img src="@/assets/edit.png" alt="Edit icon" class="icon" />
+  <img src="@/assets/edit.png" alt="edit icon" class="icon" />
 </template>
 
 <style scoped>
