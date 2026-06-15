@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AuthView from '@/views/AuthPage.vue'
 import HomeView from '@/views/HomePage.vue'
 import BrandsView from '@/views/BrandsPage.vue'
+import TradingView from '@/views/TradingPage.vue'
 import ProfileView from '@/views/ProfilePage.vue'
 
 
@@ -28,6 +29,14 @@ const router = createRouter({
       path: '/brands',
       name: 'brands',
       component: BrandsView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/trading',
+      name: 'trading',
+      component: TradingView,
       meta: {
         requiresAuth: true,
       },

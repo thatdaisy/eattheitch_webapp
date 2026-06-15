@@ -1,9 +1,6 @@
 <template>
   <div class="page-shell">
-    <AppHeader
-      :user="user"
-      @logout="auth.logout"
-    />
+    <AppHeader :user="user" @logout="auth.logout" />
 
     <!-- Profile Content -->
     <div class="page-content single-column">
@@ -17,10 +14,7 @@
           :formatDate="formatDate"
           @logout="handleLogout"
         />
-        <CountrySelect
-          v-model="profileForm.country"
-        />
-
+        <CountrySelect v-model="profileForm.country" />
       </div>
 
       <div class="content-section">
@@ -42,36 +36,14 @@ import MeCard from '@/components/auth/MeCard.vue'
 import AppHeader from '@/components/common/AppHeader.vue'
 import { reactive } from 'vue'
 import CountrySelect from '@/components/common/CountrySelect.vue'
+import { formatDate } from '@/utils/formatter'
 
 const profileForm = reactive({
-  country: ''
+  country: '',
 })
 
 const auth = useAuthStore()
 const user = auth.user
-
-function formatDate(iso) {
-  if (!iso) return '—'
-  return new Date(iso).toLocaleDateString('en-AT', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  })
-}
 </script>
 
-<style scoped>
-.activity-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.95rem;
-  padding: 0.5rem 0;
-  border-top: 1px solid var(--light-gray);
-}
-
-.activity-label { color: var(--mid-gray); font-weight: 500 }
-.activity-value { color: var(--charcoal) }
-</style>
+<style scoped></style>

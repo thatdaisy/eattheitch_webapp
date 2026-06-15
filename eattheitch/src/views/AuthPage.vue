@@ -69,18 +69,10 @@ import { useAuthStore } from '@/stores/auth'
 import LeftPanel from '@/components/auth/LeftPanel.vue'
 import LoginForm from '@/components/auth/LoginForm.vue'
 import RegisterForm from '@/components/auth/RegisterForm.vue'
-import MeCard from '@/components/auth//MeCard.vue'
+import MeCard from '@/components/auth/MeCard.vue'
 
 const auth = useAuthStore()
 
-const { 
-  user, 
-  view, 
-  loading, 
-  error, 
-  successMsg, 
-  fieldErrors, 
-  loginForm, 
-  registerForm 
-} =  storeToRefs(auth)
+const { user, view, loading, error, successMsg, fieldErrors, loginForm, registerForm } =
+  storeToRefs(auth)
 </script>
