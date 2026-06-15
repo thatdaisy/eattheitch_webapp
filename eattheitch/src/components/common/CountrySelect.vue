@@ -71,9 +71,6 @@ async function loadCountries() {
 
   try {
     const res = await apiFetch('/countries')
-
-    console.log('API DATA:', res)
-
     countries.value = res.data
   } catch (e) {
     console.error(e)
@@ -81,8 +78,6 @@ async function loadCountries() {
   } finally {
     loading.value = false
   }
-
-  console.log('COUNTRIES VALUE:', countries.value)
 }
 
 function updateValue(event) {

@@ -4,28 +4,22 @@
   gap: 1rem;
   max-width: 600px;
   margin: 0 auto;
-}
-
-.status {
-  text-align: center;
-  padding: 1rem;
-  color: #666;
-}
-
-.status.error {
-  color: #c0392b;
+  background: var(--sand);
+  margin: 25px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
 }
 
 .card-element {
   border: 1px solid #e0e0e0;
   border-radius: 10px;
   padding: 1rem 1.25rem;
-  background: var(--sand);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .author {
-    font-size: 0.75rem;
+  font-size: 0.75rem;
   color: var(--sage);
 }
 
@@ -38,7 +32,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
 }
 
 .card-brand {
@@ -58,7 +51,7 @@
 }
 
 .card-text {
-font-size: 0.75rem;
+  font-size: 0.75rem;
   margin: 0;
   color: var(--charcoal);
   line-height: 1.5;
