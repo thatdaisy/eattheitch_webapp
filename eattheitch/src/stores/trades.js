@@ -16,6 +16,11 @@ export const useTradesStore = defineStore('trades', {
   }),
 
   getters: {
+    tradesByAuthor: (state) => {
+      return (username) => {
+        return (state.trades ?? []).filter((trade) => trade.author === username)
+      }
+    },
   },
 
   actions: {

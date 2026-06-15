@@ -19,12 +19,15 @@
 
       <div class="content-section">
         <div class="section-header">
-          <h2>Activity</h2>
+          <h2>My Trades</h2>
         </div>
-        <div class="activity-row">
-          <span class="activity-label">Last login</span>
-          <span class="activity-value">{{ formatDate(user?.last_login) }}</span>
+        <div v-if="loading">Loading...</div>
+        <div v-for="trade in myTrades">
+          <TradeCard :trade="trade" :user="user" @edit="handleEdit" @delete="tradesStore.deleteTrade" />
         </div>
+        <p v-if="error">
+          {{ error }}
+        </p>
       </div>
     </div>
   </div>
@@ -32,11 +35,13 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/auth'
+import { useTradesStore } from '@/stores/trades'
 import MeCard from '@/components/auth/MeCard.vue'
 import AppHeader from '@/components/common/AppHeader.vue'
-import { reactive } from 'vue'
+import { onMounted, computed, reactive } from 'vue'
 import CountrySelect from '@/components/common/CountrySelect.vue'
 import { formatDate } from '@/utils/formatter'
+import TradeCard from '@/components/trades/TradeCard.vue'
 
 const profileForm = reactive({
   country: '',
@@ -44,6 +49,13 @@ const profileForm = reactive({
 
 const auth = useAuthStore()
 const user = auth.user
+const tradesStore = useTradesStore()
+console.log('username: ', user.username)
+const myTrades = computed(() => tradesStore.tradesByAuthor(user.username))
+
+onMounted(() => {
+  tradesStore.initialize()
+})
 </script>
 
 <style scoped></style>

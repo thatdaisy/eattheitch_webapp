@@ -49,7 +49,7 @@
         <textarea id="text" v-model="form.text" rows="4" required></textarea>
       </div>
 
-      <button type="submit" :disabled="submitting">
+      <button class="form-button" type="submit" :disabled="submitting">
         {{ submitting ? 'Submitting...' : 'Submit Review' }}
       </button>
 

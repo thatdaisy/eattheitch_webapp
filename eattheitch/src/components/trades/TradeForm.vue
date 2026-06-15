@@ -18,9 +18,11 @@
 
     <textarea v-model="form.text" />
 
-    <button :disabled="loading">
-      {{ selectedTrade ? 'Update' : 'Create' }}
-    </button>
+    <div>
+      <button :disabled="loading">
+        {{ selectedTrade ? 'Update' : 'Create' }}
+      </button>
+    </div>
   </form>
 </template>
 
@@ -89,7 +91,9 @@ async function submit() {
 }
 </script>
 
-<style>
+<style scoped>
+@import '../../styles/form.css';
+
 .success-message {
   margin-bottom: 1rem;
   padding: 0.75rem 1rem;

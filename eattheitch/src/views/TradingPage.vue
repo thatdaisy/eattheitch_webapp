@@ -9,7 +9,7 @@
         </div>
         <div v-if="loading">Loading...</div>
         <div v-for="trade in trades">
-          <TradeCard :trade="trade" />
+          <TradeCard :trade="trade" :user="user"/>
         </div>
         <p v-if="error">
           {{ error }}

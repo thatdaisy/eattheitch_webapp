@@ -12,17 +12,33 @@
         {{ trade.text }}
       </p>
     </div>
+
+    <div v-if="isOwner" class="card-actions">
+      <button class="form-btn-icon" @click="$emit('edit', trade)"><EditIcon /></button>
+      <button class="form-btn-icon" @click="$emit('delete', trade.id)"><BinIcon /></button>
+    </div>
   </div>
 </template>
 
 <script setup>
+import BinIcon from '../icons/BinIcon.vue'
+import EditIcon from '../icons/EditIcon.vue'
 import { formatDate } from '@/utils/formatter'
+import { computed } from 'vue'
 
 const props = defineProps({
   trade: Object,
+  user: Object,
+})
+
+const emit = defineEmits(['edit', 'delete'])
+
+const isOwner = computed(() => {
+  return props.user.username === props.trade.author
 })
 </script>
 
 <style scoped>
 @import '../../styles/card-style.css';
+@import '../../styles/form.css';
 </style>

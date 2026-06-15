@@ -19,8 +19,10 @@
 }
 
 .author {
+  font-family: var(--font-serif);
   font-size: 0.75rem;
-  color: var(--sage);
+  font-weight: 600;
+  color: var(--moss);
 }
 
 .date {
