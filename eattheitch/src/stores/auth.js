@@ -146,6 +146,28 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
+    async updateUser(id, payload) {
+      this.clearErrors()
+      this.loading = true
+
+      try {
+        const { ok, status, data } = await apiFetch(`/users/${id}`, {
+          method: 'PUT',
+          body: JSON.stringify(payload),
+        })
+
+        if (ok) {
+          this.successMsg = 'User updated successfully.'
+        } else {
+          this.handleApiError(data, status)
+        }
+      } catch {
+        this.error = 'Could not reach the server.'
+      } finally {
+        this.loading = false
+      }
+    },
+
     handleApiError(data, status) {
       if (status === 422 && data?.fields) {
         this.fieldErrors = data.fields

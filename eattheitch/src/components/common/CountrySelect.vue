@@ -1,9 +1,6 @@
 <template>
   <div class="field">
-    <label :for="id">{{ label }}</label>
-
     <select
-      :id="id"
       :value="modelValue"
       @change="updateValue"
       :disabled="loading"
@@ -13,7 +10,7 @@
         {{ loading ? 'Loading countries…' : props.placeholder }}
       </option>
 
-      <option v-for="country in countries" :key="country.code" :value="country.code">
+      <option v-for="country in countries" :key="country.code" :value="country.name">
         {{ country.flag }} {{ country.name }}
       </option>
     </select>
@@ -25,41 +22,54 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { apiFetch } from '@/utils/api'
+import { onMounted, watch } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useCountriesStore } from '@/stores/countries'
+
+const countriesStore = useCountriesStore()
+const {countries, loading, error } = storeToRefs(countriesStore)
 
 const props = defineProps({
-  
   placeholder: {
     type: String,
     default: 'Select a country',
+  },
+  modelValue: {
+    type: String,
+    default: '',
+  },
+  selectedCountryName: {
+    type: String,
+    default: '',
   },
 })
 
 const emit = defineEmits(['update:modelValue'])
 
-const countries = ref([])
-const loading = ref(false)
-const error = ref('')
+watch(
+  () => [countries.value, props.selectedCountryName],
+  ([list, selectedName]) => {
+    if (!list.length || !selectedName) return
 
-async function loadCountries() {
-  loading.value = true
-  error.value = ''
+    const match = list.find((c) => c.name.toLowerCase() === selectedName.toLowerCase())
 
-  try {
-    const res = await apiFetch('/countries')
-    countries.value = res.data
-  } catch (e) {
-    console.error(e)
-    error.value = 'Failed to load countries'
-  } finally {
-    loading.value = false
-  }
-}
+    if (match) {
+      emit('update:modelValue', match.name)
+    }
+  },
+  { immediate: true },
+)
 
 function updateValue(event) {
   emit('update:modelValue', event.target.value)
 }
 
-onMounted(loadCountries)
+onMounted(() => {
+  countriesStore.initialize()
+})
 </script>
+
+<style scoped>
+@import '../../styles/card-style.css';
+@import '../../styles/form.css';
+</style>

@@ -8,13 +8,7 @@
         <div class="section-header">
           <h2>My Profile</h2>
         </div>
-        <MeCard
-          :user="user"
-          :loading="auth.loading"
-          :formatDate="formatDate"
-          @logout="handleLogout"
-        />
-        <CountrySelect v-model="profileForm.country" />
+        <MeCard :user="user" />
       </div>
 
       <div class="content-section">
@@ -26,8 +20,6 @@
           <TradeCard
             :trade="trade"
             :user="user"
-            @edit="handleEdit"
-            @delete="tradesStore.deleteTrade"
           />
         </div>
         <p v-if="error">
@@ -39,23 +31,18 @@
 </template>
 
 <script setup>
-import { useAuthStore } from '@/stores/auth'
-import { useTradesStore } from '@/stores/trades'
 import MeCard from '@/components/auth/MeCard.vue'
 import AppHeader from '@/components/common/AppHeader.vue'
-import { onMounted, computed, reactive } from 'vue'
-import CountrySelect from '@/components/common/CountrySelect.vue'
-import { formatDate } from '@/utils/formatter'
 import TradeCard from '@/components/trades/TradeCard.vue'
-
-const profileForm = reactive({
-  country: '',
-})
+import { useAuthStore } from '@/stores/auth'
+import { useTradesStore } from '@/stores/trades'
+import { onMounted, computed } from 'vue'
+import { storeToRefs } from 'pinia'
 
 const auth = useAuthStore()
 const user = auth.user
 const tradesStore = useTradesStore()
-console.log('username: ', user.username)
+const { loading, error } = storeToRefs(tradesStore)
 const myTrades = computed(() => tradesStore.tradesByAuthor(user.username))
 
 onMounted(() => {

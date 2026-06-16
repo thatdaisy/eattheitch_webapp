@@ -2,7 +2,7 @@
   border: 1px solid #e0e0e0;
   border-radius: 10px;
   padding: 1rem 1.25rem;
-  background: var(--sand);
+  background: var(--cream);
 }
 
 .form.base {
@@ -55,8 +55,8 @@ textarea {
 }
 
 .form-btn-icon {
-  height: 2rem;
-  width: 2rem;
+  min-height: 30px;
+  min-width: 30px;
   margin: 5px 20px 5px 5px;
   border: none;
   border-radius: 6px;
