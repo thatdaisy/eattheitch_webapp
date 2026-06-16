@@ -52,7 +52,7 @@
 }
 
 .logout-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--mid-gray);
   border-color: white;
 }
 
@@ -90,7 +90,7 @@
   background: var(--terracotta);
   color: var(--warm-white);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(44, 95, 45, 0.15);
+  box-shadow: 0 4px 12px var(--charcoal);
 }
 
 .nav-button:active {
@@ -101,7 +101,7 @@
   background: var(--rust);
   border-color: var(--rust);
   color: var(--warm-white);
-  box-shadow: 0 4px 12px rgba(196, 97, 42, 0.2);
+  box-shadow: 0 4px 12px var(--charcoal);
 }
 
 /* Filters */
@@ -202,25 +202,13 @@
 
 .item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px var(--charcoal);
 }
 
-.trade-item {
-  background: var(--sage);
-  color: var(--charcoal);
-}
-.pattern-item {
-  background: var(--rust);
-  color: white;
-}
-.event-item {
-  background: var(--light-gray);
-  color: var(--charcoal);
-}
-.forum-item {
-  background: var(--sand);
-  color: var(--charcoal);
-}
+.trade-item   { background: var(--sage);       color: var(--charcoal) }
+.pattern-item { background: var(--rust);        color: var (--warm-white)}
+.event-item   { background: var(--light-gray);  color: var(--charcoal) }
+.forum-item   { background: var(--sand);        color: var(--charcoal) }
 
 .item-title {
   font-size: 1.1rem;
@@ -331,7 +319,7 @@
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: var(--charcoal);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -395,7 +383,7 @@
 
 .modal-actions button[type='submit'] {
   background: var(--moss);
-  color: white;
+  color: var(--warm-white);
 }
 
 .modal-actions button[type='submit']:hover {
