@@ -15,8 +15,7 @@ export const useBrandsStore = defineStore('brands', {
     fieldErrors: {},
   }),
 
-  getters: {
-  },
+  getters: {},
 
   actions: {
     clearErrors() {
@@ -65,6 +64,15 @@ export const useBrandsStore = defineStore('brands', {
       } finally {
         this.loading = false
       }
+    },
+
+    setSelectedBrandById(id) {
+      if (!this.brands) {
+        this.selectedBrand = null
+        return
+      }
+
+      this.selectedBrand = this.brands.find((brand) => brand.id === id) || null
     },
   },
 })

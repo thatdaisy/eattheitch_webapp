@@ -19,14 +19,14 @@
     </div>
 
     <div v-if="isOwner" class="card-actions">
-      <template v-if="isEditing">
+      <div v-if="isEditing">
         <button class="form-btn-icon" @click="saveEdit"><SaveIcon /></button>
         <button class="form-btn-icon" @click="cancelEdit"><CancelIcon /></button>
-      </template>
-      <template v-else>
+      </div>
+      <div v-else>
         <button class="form-btn-icon" @click="startEdit"><EditIcon /></button>
         <button class="form-btn-icon" @click="remove"><BinIcon /></button>
-      </template>
+      </div>
     </div>
   </div>
 </template>

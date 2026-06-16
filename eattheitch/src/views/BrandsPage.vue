@@ -10,9 +10,7 @@
           </div>
           <div v-if="loading">Loading...</div>
           <div v-for="brand in brands" v-bind:key="brand.id">
-          <BrandCardSmall
-            :brand="brand"
-          />
+            <BrandCardSmall :brand="brand" />
           </div>
           <p v-if="error">
             {{ error }}
@@ -20,8 +18,12 @@
         </section>
       </div>
 
-      <div class="content-right">
+      <div class="content-right" v-if="selectedBrand">
         <section class="content-section">
+          <div>
+            <BrandCardSmall :brand="selectedBrand" />
+          </div>
+
           <div class="section-header">
             <h2>New Review</h2>
           </div>
@@ -46,7 +48,7 @@ const brandsStore = useBrandsStore()
 
 const currentBrand = 'b0000015-0000-4000-8000-000000000015'
 const { user } = storeToRefs(auth)
-const { brands, loading, error } = storeToRefs(brandsStore)
+const { brands, loading, error, selectedBrand } = storeToRefs(brandsStore)
 
 onMounted(() => {
   brandsStore.initialize()
