@@ -10,7 +10,7 @@
           </div>
           <div v-if="loading">Loading...</div>
           <div v-for="brand in brands" v-bind:key="brand.id">
-            <BrandCardSmall :brand="brand" />
+            <BrandCardSmall :brand="brand" :selected-brand="selectedBrand"/>
           </div>
           <p v-if="error">
             {{ error }}
@@ -20,14 +20,25 @@
 
       <div class="content-right" v-if="selectedBrand">
         <section class="content-section">
+          <div class="section-header">
+            <h2>Details</h2>
+          </div>
           <div>
-            <BrandCardSmall :brand="selectedBrand" />
+            <BrandCard :brand="selectedBrand" />
           </div>
 
           <div class="section-header">
             <h2>New Review</h2>
           </div>
           <ReviewForm :user="user" />
+        </section>
+        <section class="content-section" v-if="selectedBrand">
+          <div class="section-header">
+            <h2>Details</h2>
+          </div>
+          <div>
+            <BrandCard :brand="selectedBrand" />
+          </div>
         </section>
       </div>
     </div>
@@ -37,6 +48,7 @@
 <script setup>
 import AppHeader from '@/components/common/AppHeader.vue'
 import BrandCardSmall from '@/components/brands/BrandCardSmall.vue'
+import BrandCard from '@/components/brands/BrandCard.vue'
 import ReviewForm from '@/components/reviews/ReviewForm.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useBrandsStore } from '@/stores/brands'

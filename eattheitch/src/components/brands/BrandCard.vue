@@ -1,11 +1,7 @@
 <template>
-  <div 
-  class="card-base"
-  :class="{ selected: isSelected }">
+  <div class="card-base">
     <div class="card-inline">
       <div class="card-brand">{{ brand.name }}</div>
-
-      <button class="form-btn-icon" @click="select"><MoreIcon /></button>
     </div>
     <div>
       <div class="card-inline">
@@ -18,25 +14,11 @@
 </template>
 
 <script setup>
-import MoreIcon from '../icons/MoreIcon.vue'
-import { useBrandsStore } from '@/stores/brands.js'
-import { computed } from 'vue'
 
 const props = defineProps({
-  brand: Object,
-  selectedBrand: Object,
+  brand: Object
 })
 
-const brandsStore = useBrandsStore()
-
-const select = async () => {
-  await brandsStore.setSelectedBrandById(props.brand.id)
-  isSelected
-}
-
-const isSelected = computed(() => {
-  return props.brand === props.selectedBrand
-})
 </script>
 
 <style scoped>
