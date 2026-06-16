@@ -4,7 +4,7 @@
     <div v-else-if="error" class="status error">{{ error }}</div>
 
     <div v-else class="card-element" v-for="trade in visibleTrades" :key="trade.id">
-      <div class="card-header">
+      <div class="card-inline">
         <div class="author">{{ trade.author }}</div>
         <div class="date">{{ formatDate(trade.created_at) }}</div>
       </div>

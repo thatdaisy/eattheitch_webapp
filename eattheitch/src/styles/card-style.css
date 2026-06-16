@@ -30,7 +30,7 @@
   color: #999;
 }
 
-.card-header {
+.card-inline {
   display: flex;
   justify-content: space-between;
   align-items: center;

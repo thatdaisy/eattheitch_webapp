@@ -71,6 +71,10 @@ textarea {
   cursor: not-allowed;
 }
 
+.form-btn-icon:hover {
+  background: var(--sage-hover);
+}
+
 .form-btn-secondary {
   width: 100%;
   margin: 20px 0px 20px;
@@ -87,6 +91,11 @@ textarea {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.form-btn-secondary:hover {
+  background: var(--sage-hover);
+}
+
 .status {
   font-size: 0.9rem;
 }

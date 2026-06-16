@@ -1,6 +1,6 @@
 <template>
   <div class="card-base">
-    <div class="card-header">
+    <div class="card-inline">
       <div class="author">{{ trade.author }}</div>
       <div class="date">{{ formatDate(trade.created_at) }}</div>
     </div>

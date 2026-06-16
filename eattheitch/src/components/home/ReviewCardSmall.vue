@@ -4,7 +4,7 @@
     <div v-else-if="error" class="status error">{{ error }}</div>
 
     <div v-else class="card-element" v-for="review in visibleReviews" :key="review.id">
-      <div class="card-header">
+      <div class="card-inline">
         <div class="author">{{ review.author }}</div>
         <div class="date">{{ formatDate(review.created_at) }}</div>
       </div>

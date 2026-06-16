@@ -42,7 +42,6 @@ export const useTradesStore = defineStore('trades', {
         const { ok, data } = await apiFetch('/trades', {
           method: 'GET',
         })
-        console.log(data)
         this.trades = ok ? data : null
       } catch {
         this.trades = null
