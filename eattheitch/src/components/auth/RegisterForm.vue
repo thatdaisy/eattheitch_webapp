@@ -8,16 +8,19 @@
     <form @submit.prevent="$emit('submit')">
       <div class="field">
         <label>Username</label>
+        <!-- eslint-disable-next-line vue/no-mutating-props -->
         <input v-model="form.username" type="text" />
       </div>
 
       <div class="field">
         <label>Email</label>
+        <!-- eslint-disable-next-line vue/no-mutating-props -->
         <input v-model="form.email" type="email" />
       </div>
 
       <div class="field">
         <label>Password</label>
+        <!-- eslint-disable-next-line vue/no-mutating-props -->
         <input v-model="form.password" type="password" />
       </div>
 

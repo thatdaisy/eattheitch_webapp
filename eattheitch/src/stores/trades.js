@@ -86,9 +86,6 @@ export const useTradesStore = defineStore('trades', {
         if (ok) {
           await this.fetchTrades()
           this.successMsg = 'Trade created successfully.'
-          setTimeout(() => {
-            successMsg = ''
-          }, 1000)
         } else {
           this.handleApiError(data, status)
         }

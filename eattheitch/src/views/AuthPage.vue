@@ -36,7 +36,9 @@
             :fieldErrors="fieldErrors"
             :form="loginForm"
             @submit="auth.login"
-            @switch="switchView"
+            @switch="auth.switchView"
+            @update:email="form.email = $event"
+            @update:password="form.password = $event"
           />
 
           <RegisterForm
@@ -46,7 +48,7 @@
             :fieldErrors="fieldErrors"
             :form="registerForm"
             @submit="auth.register"
-            @switch="switchView"
+            @switch="auth.switchView"
           />
         </div>
 

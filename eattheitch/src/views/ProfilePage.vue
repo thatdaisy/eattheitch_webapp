@@ -22,7 +22,7 @@
           <h2>My Trades</h2>
         </div>
         <div v-if="loading">Loading...</div>
-        <div v-for="trade in myTrades">
+        <div v-for="trade in myTrades" v-bind:key="trade.ID">
           <TradeCard
             :trade="trade"
             :user="user"

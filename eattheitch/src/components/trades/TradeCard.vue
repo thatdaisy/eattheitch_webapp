@@ -25,7 +25,7 @@
       </template>
       <template v-else>
         <button class="form-btn-icon" @click="startEdit"><EditIcon /></button>
-        <button class="form-btn-icon" @click="$emit('delete', trade.id)"><BinIcon /></button>
+        <button class="form-btn-icon" @click="remove"><BinIcon /></button>
       </template>
     </div>
   </div>
@@ -46,8 +46,6 @@ const props = defineProps({
   trade: Object,
   user: Object,
 })
-
-const emit = defineEmits(['delete'])
 
 const tradesStore = useTradesStore()
 const {fieldErrors} = storeToRefs(tradesStore)
@@ -76,6 +74,10 @@ const startEdit = () => {
 
 const cancelEdit = () => {
   isEditing.value = false
+}
+
+const remove = async () => {
+  await tradesStore.deleteTrade(props.trade.id)
 }
 
 const saveEdit = async () => {

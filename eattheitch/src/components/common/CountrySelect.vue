@@ -10,7 +10,7 @@
       class="country-select"
     >
       <option value="">
-        {{ loading ? 'Loading countries…' : placeholder }}
+        {{ loading ? 'Loading countries…' : props.placeholder }}
       </option>
 
       <option v-for="country in countries" :key="country.code" :value="country.code">
@@ -29,24 +29,10 @@ import { ref, onMounted } from 'vue'
 import { apiFetch } from '@/utils/api'
 
 const props = defineProps({
-  modelValue: {
-    type: String,
-    default: '',
-  },
-
-  label: {
-    type: String,
-    default: 'Country',
-  },
-
+  
   placeholder: {
     type: String,
     default: 'Select a country',
-  },
-
-  id: {
-    type: String,
-    default: 'country',
   },
 })
 

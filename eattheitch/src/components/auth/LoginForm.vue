@@ -1,5 +1,4 @@
 <template>
-  <transition name="fade" mode="out-in">
     <div key="login">
       <p class="form-title">Welcome back.</p>
       <p class="form-desc">Sign in to access your reviews and the craftivism hub.</p>
@@ -10,12 +9,14 @@
       <form @submit.prevent="$emit('submit')">
         <div class="field">
           <label>Email</label>
+          <!-- eslint-disable-next-line vue/no-mutating-props -->
           <input v-model="form.email" type="email" />
           <div v-if="fieldErrors.email" class="field-error">{{ fieldErrors.email }}</div>
         </div>
 
         <div class="field">
           <label>Password</label>
+          <!-- eslint-disable-next-line vue/no-mutating-props -->
           <input v-model="form.password" type="password" />
           <div v-if="fieldErrors.password" class="field-error">{{ fieldErrors.password }}</div>
         </div>
@@ -31,7 +32,6 @@
         Create a new account
       </button>
     </div>
-  </transition>
 </template>
 
 <script setup>
