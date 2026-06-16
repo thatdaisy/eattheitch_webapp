@@ -27,7 +27,7 @@
           <div class="section-header">
             <h2>New Review</h2>
           </div>
-          <ReviewForm :user="user" :currentBrand="currentBrand" />
+          <ReviewForm :user="user" />
         </section>
       </div>
     </div>
@@ -46,7 +46,6 @@ import { storeToRefs } from 'pinia'
 const auth = useAuthStore()
 const brandsStore = useBrandsStore()
 
-const currentBrand = 'b0000015-0000-4000-8000-000000000015'
 const { user } = storeToRefs(auth)
 const { brands, loading, error, selectedBrand } = storeToRefs(brandsStore)
 

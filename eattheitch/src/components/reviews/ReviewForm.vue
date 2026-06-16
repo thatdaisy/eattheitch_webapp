@@ -4,6 +4,19 @@
       <input id="author" v-model="form.author" type="text" required disabled hidden />
 
       <div class="form-group">
+        <label for="brand">Brand</label>
+        <select id="brand" v-model="selectedBrandId" required :disabled="loadingBrands">
+          <option value="" disabled>
+            {{ loadingBrands ? 'Loading brands...' : 'Select a brand' }}
+          </option>
+          <option v-for="brand in brands" :key="brand.id" :value="brand.id">
+            {{ brand.name }}
+          </option>
+        </select>
+        <p v-if="brandsError" class="status error">{{ brandsError }}</p>
+      </div>
+
+      <div class="form-group">
         <label for="rating_overall">Overall Rating</label>
         <select id="rating_overall" v-model.number="form.rating_overall" required>
           <option value="" disabled>Select rating</option>
@@ -48,7 +61,7 @@
         <textarea id="text" v-model="form.text" rows="4" required></textarea>
       </div>
 
-      <button class="form-button" type="submit" :disabled="submitting">
+      <button class="form-button" type="submit" :disabled="submitting || !selectedBrandId">
         {{ submitting ? 'Submitting...' : 'Submit Review' }}
       </button>
 
@@ -59,13 +72,44 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { apiFetch } from '@/utils/api'
 
 const props = defineProps({
   user: Object,
-  currentBrand: String,
 })
+
+
+const brands = ref([])
+const selectedBrandId = ref('')
+const loadingBrands = ref(false)
+const brandsError = ref('')
+
+async function loadBrands() {
+  loadingBrands.value = true
+  brandsError.value = ''
+  try {
+    const res = await apiFetch('/brands?per_page=100')
+
+    if (!res.ok) {
+      console.error('Brands request failed:', res.status, res.data)
+      brandsError.value = `Failed to load brands (status ${res.status})`
+      return
+    }
+
+    brands.value = res.data?.brands ?? []
+
+    if (brands.value.length === 0) {
+      console.warn('Brands response had no brands array:', res.data)
+    }
+  } catch (e) {
+    console.error(e)
+    brandsError.value = 'Failed to load brands'
+  } finally {
+    loadingBrands.value = false
+  }
+}
+onMounted(loadBrands)
 
 const form = reactive({
   author: props.user.username,
@@ -89,7 +133,7 @@ async function submitReview() {
   error.value = ''
 
   try {
-    const url = '/brands' + props.currentBrand + '/reviews'
+    const url = '/brands/' + selectedBrandId.value + '/reviews'
     const res = await apiFetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -101,7 +145,7 @@ async function submitReview() {
 
     // reset form
     Object.assign(form, {
-      author: '',
+      
       rating_overall: '',
       rating_softness: '',
       rating_quality: '',

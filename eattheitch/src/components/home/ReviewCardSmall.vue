@@ -9,7 +9,10 @@
         <div class="date">{{ formatDate(review.created_at) }}</div>
       </div>
 
-      <div class="rating-overall"><SheepIcon /> {{ review.rating_overall }}/5</div>
+      <div class="rating-overall">
+        <SheepIcon /> {{ review.rating_overall }}/5
+        <span class="brand-name">{{ brandName(review.brand_id) }}</span>
+      </div>
 
       <div class="rating-grid">
         <div class="rating-item">
@@ -33,6 +36,7 @@
         </div>
       </div>
 
+
       <p class="card-text">
         {{ review.text }}
       </p>
@@ -47,10 +51,21 @@ import { apiFetch } from '@/utils/api'
 import { formatDate } from '@/utils/formatter'
 
 const reviews = ref([])
+const brands = ref([])
 const loading = ref(false)
 const error = ref('')
 
 const visibleReviews = computed(() => reviews.value.slice(0, 3))
+
+const brandsById = computed(() => {
+  const map = new Map()
+  brands.value.forEach((b) => map.set(b.id, b.name))
+  return map
+})
+
+function brandName(brandId) {
+  return brandsById.value.get(brandId) ?? 'Unbekannte Marke'
+}
 
 async function loadReviews() {
   loading.value = true
@@ -58,7 +73,6 @@ async function loadReviews() {
 
   try {
     const res = await apiFetch('/reviews')
-    console.log(res.data)
     reviews.value = res.data.reviews ?? res.data
   } catch (e) {
     console.error(e)
@@ -68,7 +82,19 @@ async function loadReviews() {
   }
 }
 
-onMounted(loadReviews)
+async function loadBrands() {
+  try {
+    const res = await apiFetch('/brands?per_page=100')
+    brands.value = res.data?.brands ?? []
+  } catch (e) {
+    console.error('Failed to load brands for name lookup:', e)
+  }
+}
+
+onMounted(() => {
+  loadReviews()
+  loadBrands()
+})
 </script>
 
 <style scoped>
@@ -79,6 +105,16 @@ onMounted(loadReviews)
   margin-bottom: 0.5rem;
   font-size: 1.25rem;
   color: var(--forest);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--charcoal);
+  margin-left: auto;
 }
 
 .rating-grid {
