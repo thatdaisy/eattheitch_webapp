@@ -18,11 +18,7 @@ export const useReviewsStore = defineStore('reviews', {
   getters: {
     reviewsForBrand: (state) => {
       return (brand) => {
-        console.log('brand:', brand)
-
         return (state.reviews ?? []).filter((review) => {
-          console.log('review.brand:', review.brand, 'brand.name:', brand.name)
-
           return review.brand === brand
         })
       }
@@ -86,12 +82,12 @@ export const useReviewsStore = defineStore('reviews', {
       }
     },
 
-    async createReview(payload) {
+    async createReview(brandId, payload) {
       this.clearErrors()
       this.loading = true
 
       try {
-        const { ok, status, data } = await apiFetch('/reviews', {
+        const { ok, status, data } = await apiFetch(`/brands/${brandId}/reviews`, {
           method: 'POST',
           body: JSON.stringify(payload),
         })

@@ -30,16 +30,12 @@
           <div>
             <BrandCard :brand="selectedBrand" />
           </div>
-          {{ reviewsForBrand }}
-          <div v-for="review in reviewsForBrand" v-bind:key="review.id">
-            {{ review.text }}
-          </div>
         </section>
         <section class="content-section">
           <div class="section-header">
             <h2>New Review</h2>
           </div>
-          <ReviewForm :user="user" />
+          <ReviewCreate :user="user" :brands="brandsStore.brandOptions" />
         </section>
       </div>
     </div>
@@ -50,7 +46,7 @@
 import AppHeader from '@/components/common/AppHeader.vue'
 import BrandCardSmall from '@/components/brands/BrandCardSmall.vue'
 import BrandCard from '@/components/brands/BrandCard.vue'
-import ReviewForm from '@/components/reviews/ReviewForm.vue'
+import ReviewCreate from '@/components/reviews/ReviewCreate.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useBrandsStore } from '@/stores/brands'
 import { onMounted } from 'vue'

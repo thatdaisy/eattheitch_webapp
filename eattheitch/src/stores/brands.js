@@ -15,7 +15,14 @@ export const useBrandsStore = defineStore('brands', {
     fieldErrors: {},
   }),
 
-  getters: {},
+  getters: {
+      brandOptions: (state) => {
+        return (state.brands ?? []).map((brand) => ({
+          id: brand.id,
+          name: brand.name,
+        }))
+      },
+  },
 
   actions: {
     clearErrors() {

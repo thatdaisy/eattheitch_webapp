@@ -29,7 +29,6 @@
 </template>
 
 <script setup>
-import ReviewForm from './ReviewForm.vue'
 import BinIcon from '../icons/BinIcon.vue'
 import EditIcon from '../icons/EditIcon.vue'
 import SaveIcon from '../icons/SaveIcon.vue'
