@@ -39,6 +39,10 @@
           <div>
             <BrandCard :brand="selectedBrand" />
           </div>
+          {{ reviewsForBrand }}
+          <div v-for="review in reviewsForBrand" v-bind:key="review.id">
+            {{ review.text }}
+          </div>
         </section>
       </div>
     </div>
@@ -52,14 +56,18 @@ import BrandCard from '@/components/brands/BrandCard.vue'
 import ReviewForm from '@/components/reviews/ReviewForm.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useBrandsStore } from '@/stores/brands'
-import { onMounted } from 'vue'
+import { useReviewsStore } from '@/stores/reviews'
+import { onMounted, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 
 const auth = useAuthStore()
 const brandsStore = useBrandsStore()
+const reviewsStore = useReviewsStore()
 
 const { user } = storeToRefs(auth)
 const { brands, loading, error, selectedBrand } = storeToRefs(brandsStore)
+
+const reviewsForBrand = computed(() => reviewsStore.reviewsByBrand(selectedBrand.name))
 
 onMounted(() => {
   brandsStore.initialize()

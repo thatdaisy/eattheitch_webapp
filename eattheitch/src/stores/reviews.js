@@ -16,17 +16,22 @@ export const useReviewsStore = defineStore('reviews', {
   }),
 
   getters: {
-    reviewsByBrand: (state) => (brandId) => state.reviews.filter((r) => r.brand_id === brandId),
-
-    averageRating: (state) => {
-      if (!state.reviews.length) return 0
-
-      const sum = state.reviews.reduce((acc, r) => {
-        return acc + (r.rating_overall || 0)
-      }, 0)
-
-      return sum / state.reviews.length
+    reviewsByBrand: (state) => {
+      return (brandName) => {
+        return (state.reviews ?? []).filter((review) => brand.brand === brandName)
+      }
     },
+
+    latestReviews: (state) => {
+    return (n = 5) => {
+      console.log(state.reviews)
+      return [...(state.reviews ?? [])]
+        .sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        )
+        .slice(0, n)
+    }
+  },
   },
 
   actions: {
@@ -34,16 +39,6 @@ export const useReviewsStore = defineStore('reviews', {
       this.error = ''
       this.successMsg = ''
       this.fieldErrors = {}
-    },
-
-    formatDate(iso) {
-      if (!iso) return '—'
-
-      return new Date(iso).toLocaleDateString('en-AT', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      })
     },
 
     async initialize() {
@@ -55,11 +50,12 @@ export const useReviewsStore = defineStore('reviews', {
     async fetchReviews() {
       this.loading = true
       try {
-        const { ok, data } = await apiFetch('/reviews')
-        console.log(data)
+        const { ok, data } = await apiFetch('/reviews', {
+          method: 'GET',
+        })
         this.reviews = ok ? data : null
       } catch {
-        this.user = null
+        this.reviews = null
       } finally {
         this.loading = false
       }
@@ -69,7 +65,9 @@ export const useReviewsStore = defineStore('reviews', {
       this.loading = true
 
       try {
-        const { ok, data } = await apiFetch(`/reviews/${id}`)
+        const { ok, data } = await apiFetch(`/reviews/${id}`, {
+          method: 'GET',
+        })
 
         if (ok) {
           this.selectedReview = data.review ?? data
@@ -150,15 +148,6 @@ export const useReviewsStore = defineStore('reviews', {
         this.error = 'Could not reach the server.'
       } finally {
         this.loading = false
-      }
-    },
-
-    handleApiError(data, status) {
-      if (status === 422 && data?.fields) {
-        this.fieldErrors = data.fields
-        this.error = 'Please fix the errors below.'
-      } else {
-        this.error = data?.message || data?.error || 'Something went wrong.'
       }
     },
   },

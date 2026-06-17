@@ -21,6 +21,14 @@ export const useTradesStore = defineStore('trades', {
         return (state.trades ?? []).filter((trade) => trade.author === username)
       }
     },
+
+    latestTrades: (state) => {
+      return (n = 5) => {
+        return [...(state.trades ?? [])]
+          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          .slice(0, n)
+      }
+    },
   },
 
   actions: {

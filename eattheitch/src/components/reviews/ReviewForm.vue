@@ -143,7 +143,6 @@ async function submitReview() {
     success.value = true
     emit('created', res.data)
 
-    // reset form
     Object.assign(form, {
       
       rating_overall: '',
