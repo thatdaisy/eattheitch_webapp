@@ -1,10 +1,7 @@
 <template>
-  <div 
-  class="card-base"
-  :class="{ selected: isSelected }">
+  <div class="card-base" :class="{ selected: isSelected }">
     <div class="card-inline">
       <div class="card-brand">{{ brand.name }}</div>
-
       <button class="form-btn-icon" @click="select"><MoreIcon /></button>
     </div>
     <div>
@@ -12,7 +9,6 @@
         <div class="card-item-bold">ECO Score: {{ brand.eco_score }}</div>
         <div class="card-item">{{ brand.origin_country }}</div>
       </div>
-      <div class="card-text">{{ brand.description }}</div>
     </div>
   </div>
 </template>

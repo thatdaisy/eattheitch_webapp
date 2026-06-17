@@ -16,22 +16,25 @@ export const useReviewsStore = defineStore('reviews', {
   }),
 
   getters: {
-    reviewsByBrand: (state) => {
-      return (brandName) => {
-        return (state.reviews ?? []).filter((review) => brand.brand === brandName)
+    reviewsForBrand: (state) => {
+      return (brand) => {
+        console.log('brand:', brand)
+
+        return (state.reviews ?? []).filter((review) => {
+          console.log('review.brand:', review.brand, 'brand.name:', brand.name)
+
+          return review.brand === brand
+        })
       }
     },
 
     latestReviews: (state) => {
-    return (n = 5) => {
-      console.log(state.reviews)
-      return [...(state.reviews ?? [])]
-        .sort(
-          (a, b) => new Date(b.created_at) - new Date(a.created_at)
-        )
-        .slice(0, n)
-    }
-  },
+      return (n = 5) => {
+        return [...(state.reviews ?? [])]
+          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          .slice(0, n)
+      }
+    },
   },
 
   actions: {
